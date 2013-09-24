@@ -1,0 +1,208 @@
+<html>
+<head>
+
+<title>Backbone.js Modal View</title>
+
+<!-- Backbone.js Dependencies -->
+<script src="lib/jquery.min.js"></script>
+<script src="lib/underscore.min.js"></script>
+<script src="lib/backbone.min.js"></script>
+
+<!-- http://fgnass.github.io/spin.js/ -->
+<script src="lib/spin/spin.min.js"></script>
+<script src="lib/spin/jquery.spin.js"></script>
+
+<!-- Bootstrap 3 - http://getbootstrap.com -->
+<link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+<!-- Panel View script -->
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="src/Modal.js"></script>
+
+<style>
+#demos > .btn {
+	margin-bottom: .5em;
+}
+</style>
+
+</head>
+<body>
+
+<div class="modal-container">
+
+<div class="navbar">
+  <div class="container">
+
+    <a class="navbar-brand" href="#">Backbone.js UI Components</a>
+
+    <ul class="nav navbar-nav">
+	  <li class=""><a href="http://kevinjantzer.com/code/backbonejs-panel-view/">Panel View</a></li>
+	  <li class=""><a href="http://kevinjantzer.com/code/backbonejs-dropdown-view/">Dropdown View</a></li>
+	  <li class="active"><a href="http://kevinjantzer.com/code/backbonejs-modal-view/">Modal View</a></li>
+	  <li class=""><a href="http://kevinjantzer.com/code/backbonejs-model-editor-view/">Model Editor</a></li>
+	</ul>
+    
+  </div><!-- /.container -->
+</div><!-- /.navbar -->
+
+<a href="https://github.com/kjantzer/backbonejs-modal-view"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+
+	<div class="col-lg-7 col-lg-offset-3">
+	
+	<h1>Backbone.js Modal View</h1>
+	<p></p>
+	<br>
+	
+	
+	<div id="demos" class="clearfix panel">
+		
+		
+		<h4>Alerts</h4>
+		
+		<a class="btn btn-primary" onclick="demo.alert()">Alert</a>
+		<a class="btn btn-primary" onclick="demo.alertTitle()">Alert title only</a>
+		<a class="btn btn-primary" onclick="demo.alertMsg()">Alert msg only</a>
+		
+		<br>
+		
+		<a class="btn btn-primary" onclick="demo.alertLong()">Alert with long message</a>
+		
+		<br><br>
+		<h4>Confirms</h4>
+		
+		<a class="btn btn-primary" onclick="demo.confirm()">Confirm</a>
+		<a class="btn btn-primary" onclick="demo.confirmCancelCallback()">Confirm with cancel callback</a>
+		<a class="btn btn-danger" onclick="demo.confirmDelete()">Confirm Delete</a>
+		
+		
+		<br><br>
+		<h4>Transition Effects</h4>
+		
+		
+		<a class="btn btn-primary" onclick="demo.modalEffect(1)">Fade In & Scale</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(2)">Slide in (right)</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(3)">Slide in (bottom)</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(4)">Newspaper</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(5)">Fall</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(6)">Side Fall</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(7)">Sticky Up</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(8)">3D Flip (horizontal)</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(9)">3D Flip (vertical)</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(10)">3D Sign</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(11)">Super Scaled</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(12)">Just Me</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(13)">3D Slit</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(14)">3D Rotate Bottom</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(15)">3D Rotate In Left</a>
+		<a class="btn btn-primary" onclick="demo.modalEffect(16)">Blur</a>
+		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(17)">Let me in</a> -->
+		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(18)">Make way!</a> -->
+		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(19)">Slip from top</a> -->
+		
+		
+		<br><br>
+		<h4>Extras</h4>
+		
+		<a class="btn btn-primary" onclick="demo.alertProgress()">Alert with progress</a>
+		<a class="btn btn-primary" onclick="demo.alertProgress('Please be patient :)')">Alert with progress & msg</a>
+		
+		<br><br>
+		<p>If you include <a href="http://fgnass.github.io/spin.js/" target="_blank">spin.js</a>, you can easily create a waiting spinner</p>
+		<a class="btn btn-primary" onclick="demo.spinner()">Spinner</a>
+		
+	</div>
+
+	<hr>
+	
+	<small>Built by Kevin Jantzer, Blackstone Audio Inc. 
+		Transitions based on the work done by <a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/">Manoela Ilic</a></small>
+	
+	</div>
+
+<script type="text/javascript">
+
+var demo = {
+	
+	alert: function(){
+		Modal.alert('Alert Title', 'This is an alert message.')
+	},
+	
+	alertTitle: function(){
+		Modal.alert('Alert Title Only', '')
+	},
+	
+	alertMsg: function(){
+		Modal.alert('This is an alert with message only, no title')
+	},
+	
+	alertLong: function(){
+		new Modal({
+			title: 'Alert Title', 
+			msg: '<p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p>'});
+	},
+	
+	
+	alertProgress: function(msg){
+		
+		var modal = new Modal({title: 'Uploading file...', msg: msg||'', btns: false})
+		
+		// fake progress
+		var progress = 0;
+		var interval = setInterval(function(){
+			
+			progress = progress+10;
+			
+			modal.progress(progress);
+			
+			if( progress >= 100 ){
+				clearInterval(interval);
+				modal.close();
+			}
+			
+		}, 200);
+		
+	},
+	
+	confirm: function(){
+		Modal.confirm(function(){
+			alert('You have confirmed this action!')
+		})
+	},
+	
+	confirmCancelCallback: function(){
+		Modal.confirm(function(){
+			alert('You have confirmed this action!')
+		}).on('cancel', function(){
+			alert('You have chosen to NOT confirm this action');
+		})
+	},
+	
+	confirmDelete: function(){
+		Modal.confirmDelete(function(){
+			alert('You have confirmed the deletion of an item!')
+		})
+	},
+	
+	spinner: function(){
+		Modal.spinner();
+		setTimeout(function(){
+			Modal.close() // closes all modals
+		}, 1200)
+	},
+	
+	modalEffect: function(effect){
+		new Modal({
+			title: 'Modal Title', 
+			msg: 'A short message about this modal.<br><br>There are several different effects that can be used<br>to show modals.',
+			effect: effect || 1
+		})
+	}
+}
+
+</script>
+
+</div>
+
+</body>
+</html>
