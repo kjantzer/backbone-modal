@@ -1,5 +1,5 @@
 /*
-    Nify Modal
+    Modal Backbone.js View
     
     Based on work done by Manoela Ilic (http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/)
     
@@ -405,7 +405,7 @@
 	
 		var $container = $('.modal-container');
 		
-		$container ? modalController.$el.insertBefore($container) : modalController.$el.appendTo('body');
+		$container.length > 0 ? modalController.$el.insertBefore($container) : modalController.$el.appendTo('body');
 	});
 	
 
