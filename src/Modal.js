@@ -31,8 +31,9 @@
 */
 (function($) {
 
+	var USE_FLEX = true; // set to false if you want to support IE and/or older versions of modern browsers.
+
 	var ModalController, Modal, modalController, SPEED = 300 /* keep in sync with CSS */;
-	
 	
 	
 	ModalController = Backbone.View.extend({
@@ -91,7 +92,10 @@
 			msg: '',
 			btns: ['close'],
 			theme: '',
-			w: null
+			w: null, 
+			hide: false, 
+			hideMessage:'Don\'t show again',
+			key: '' // will save to User.settings().get('modal') if hide is checked on close. e.g. 
 		},
 		
 		controller: new ModalController(),
@@ -100,19 +104,27 @@
 		
 			this.options = _.extend({}, this.opts, this.options||{});
 			
-			this.$el.html('<div class="md-content"><h3></h3>\
+			this.$el.html('<div><div class="md-content"><h3></h3>\
 							<div class="progress"><div class="progress-bar"></div></div>\
-							<div class="clearfix"><div class="content"></div><div class="buttons"></div></div>\
-						  </div>');
+							<div class="clearfix"><div class="content"></div>\
+							<div class="buttons"></div>\
+							<div class="checkbox hide"></div>\
+						  </div></div>');
 			
 			this.controller.add(this);
+			
+			if( USE_FLEX )
+				this.$el.addClass('flex');
 			
 			this.$title = this.$('h3');
 			this.$progress = this.$('.progress-bar');
 			this.$content = this.$('.content');
 			this.$btns = this.$('.buttons');
+			this.$checkbox = this.$('.checkbox'); 
 			
 			this.open();
+			
+			this.on('close', this.saveKey, this);
 		},
 		
 		render: function(){
@@ -127,7 +139,7 @@
 			this.renderTitle();
 			this.renderContent();
 			this.renderBtns();
-			
+			this.renderHide(); 
 			this.delegateEvents();
 			
 		},
@@ -207,6 +219,11 @@
 			this.$btns.append( $btn );
 		},
 		
+		renderHide: function(){
+			if(this.options.hide)
+				 this.$checkbox.append($('<input type="checkbox"/><span class="hide-message">' + this.options.hideMessage + '</span>')); 
+		}, 
+		
 		makeBtn: function(opts){
 		
 			if( _.isFunction(opts) )
@@ -227,7 +244,7 @@
 			$btn = $('<a class="button large flat btn btn-default '+opts.className+'">'+opts.label+'</a>');
 			
 			if( opts.onClick )
-				$btn.bind('click', function(){ _.defer(opts.onClick) });
+				$btn.bind('click', function(e){ _.defer(function(){ opts.onClick(e) }) });
 				
 			return $btn;
 		},
@@ -237,7 +254,10 @@
 		},
 		
 		spinner: function(){
-			this.$title.spin();
+			var self = this;
+			_.defer(function(){		// we defer so the auto centering of the spinner works
+				self.$title.spin();
+			})
 			return this;
 		},
 		
@@ -274,6 +294,12 @@
 				maxWidth: val
 			});
 			return this;
+		}, 
+		
+		saveKey: function(){
+			if(this.options.hide && this.$checkbox.find('input').is(':checked')){
+				User.modalKey(this.options.key, true);
+			}
 		}
 		
 	})

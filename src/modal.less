@@ -22,6 +22,9 @@
 	modal-19 => Slip from top
 */
 
+// modal wrapper that contains overlay and all modals
+
+
 /* 
 Styles for the html/body for special modal where we want 3d effects
 Note that we need a modal-container wrapping all content on the page for the 
@@ -40,7 +43,59 @@ perspective effects (not including the modals and the overlay).
 	perspective: 600px;
 }
 
-.md-modal {
+.md-modal.flex {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-moz-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-moz-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	
+	-webkit-align-content: center;
+	-moz-align-content: center;
+	align-content: center;
+	
+	-webkit-flex-wrap: wrap-reverse;
+	-moz-flex-wrap: wrap-reverse;
+	flex-wrap: wrap-reverse;
+	
+	-webkit-flex-direction: row-reverse;
+	-moz-flex-direction: row-reverse;
+	flex-direction: row-reverse;
+
+	> div {
+		position: static;
+		top: auto;
+		left: auto;
+		-webkit-transform: inherit;
+		-moz-transform: inherit;
+		-ms-transform: inherit;
+		transform: inherit;
+	}		
+}
+
+/*.modal.flex .md-modal:nth-child(1) { margin: 0.5em 0 0 0.5em; }
+.modal.flex .md-modal:nth-child(2) { margin: 1.0em 0 0 1.0em; }
+.modal.flex .md-modal:nth-child(3) { margin: 1.5em 0 0 1.5em; }
+.modal.flex .md-modal:nth-child(4) { margin: 2.0em 0 0 2.0em; }
+.modal.flex .md-modal:nth-child(5) { margin: 2.5em 0 0 2.5em; }*/
+
+.md-modal > div {
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -68,7 +123,7 @@ perspective effects (not including the modals and the overlay).
 	}
 }
 
-.md-show {
+.md-show > div {
 	visibility: visible;
 }
 
@@ -145,7 +200,7 @@ color: #fff;
 		
 		.content {
 			margin: 0 0 15px 0;
-			max-height: 250px;
+			max-height: 70%;
 			overflow-y: auto;
 			overflow-x: visible;
 			padding: 30px 30px 15px;
@@ -328,7 +383,7 @@ color: #fff;
 }
 
 /* Effect 5: fall */
-.md-effect-5.md-modal {
+.md-effect-5.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;
@@ -357,7 +412,7 @@ color: #fff;
 }
 
 /* Effect 6: side fall */
-.md-effect-6.md-modal {
+.md-effect-6.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;
@@ -386,7 +441,12 @@ color: #fff;
 }
 
 /* Effect 7:  slide and stick to top */
-.md-effect-7{
+.modal.flex .md-effect-7.md-modal {
+	-webkit-align-content: flex-end;
+	-moz-align-content: flex-end;
+	align-content: flex-end;
+}
+.md-effect-7.md-modal > div{
 	top: 0;
 	-webkit-transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
@@ -415,7 +475,7 @@ color: #fff;
 }
 
 /* Effect 8: 3D flip horizontal */
-.md-effect-8.md-modal {
+.md-effect-8.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;
@@ -444,7 +504,7 @@ color: #fff;
 }
 
 /* Effect 9: 3D flip vertical */
-.md-effect-9.md-modal {
+.md-effect-9.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;
@@ -473,7 +533,7 @@ color: #fff;
 }
 
 /* Effect 10: 3D sign */
-.md-effect-10.md-modal {
+.md-effect-10.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;
@@ -555,7 +615,7 @@ color: #fff;
 }
 
 /* Effect 13: 3D slit */
-.md-effect-13.md-modal {
+.md-effect-13.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;
@@ -594,7 +654,7 @@ color: #fff;
 }
 
 /* Effect 14:  3D Rotate from bottom */
-.md-effect-14.md-modal {
+.md-effect-14.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;
@@ -626,7 +686,7 @@ color: #fff;
 }
 
 /* Effect 15:  3D Rotate in from left */
-.md-effect-15.md-modal {
+.md-effect-15.md-modal > div {
 	-webkit-perspective: 1300px;
 	-moz-perspective: 1300px;
 	perspective: 1300px;

@@ -7,19 +7,15 @@
 @serif: 'Times New Roman';
 @sans-serif: 'Helvetica', 'Arial';
 
-.dark-hover-state() {
-	background: @dark;
-	color: #fff;
-	text-shadow: rgba(0,0,0,.5) 0 1px 0;
-}
-
-.red-hover-state() {
-	background: @red;
-	color: #fff;
-	text-shadow: rgba(0,0,0,.5) 0 1px 0;
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 
 @import 'elements.less'; // http://lesselements.com/
 @import 'lib/kjc-reusable-styles'; // https://gist.github.com/kjantzer/5436097
+@import 'lib/flexbox-mixins.less'; // https://gist.github.com/kjantzer/7948269
 
 @import 'src/modal.less';

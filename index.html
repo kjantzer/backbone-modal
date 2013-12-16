@@ -64,6 +64,8 @@
 	
 	<h1>Backbone.js Modal View</h1>
 	<p>Create simple, Bootstrap ready, modal windows with sleek transitions.</p>
+	
+	<p>NOTE: Modal.js defaults to using cutting-edge css3 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes" target="_blank">"flexbox"</a> for the layout. This can be turned off if you wish to support older browsers. Flexbox makes the text nice and sharp.</p>
 	<br>
 	
 	
@@ -123,6 +125,53 @@
 		<p>If you include <a href="http://fgnass.github.io/spin.js/" target="_blank">spin.js</a>, you can easily create a waiting spinner</p>
 		<a class="btn btn-primary" onclick="demo.spinner()">Spinner</a>
 		
+	</div>
+	
+	<br>
+	
+	<h3>How to use</h3>
+	<p>Creating new Modals is very simple.<br>Go ahead, open up your console and try some of these.</p>
+	</br>
+	
+	<div class="clearfix panel">
+	
+<pre><code>
+Modal.alert('Alert Title', 'This is an alert message.');
+
+
+Modal.alert('Alert Title', 'This is an alert message.', function(){
+	// this is the callback for when the "ok" button is clicked
+});
+
+
+Modal.alert('Alert Title Only', '');
+
+
+Modal.alert('This is an alert with message only, no title');
+
+
+// show a spinner
+var spinner = Modal.spinner();
+
+// close all modals
+Modal.close();
+
+
+
+// those methods above are just shortcuts to creating Modals.
+// You can call the modal method on its own for complete control
+
+new Modal({
+	title: 'Title',
+	msg: 'The message text here. This could be HTML, or a jQuery object',
+	effect: 1, // 2, 3, 4, 5, 6 ... see top of Modal.js for style names
+	btns: [
+		'close', // shortcut to create close button
+		{label: 'Another Button', className: 'button-primary', onClick: function(){}};
+	]
+})
+</code></pre>
+	
 	</div>
 
 	<hr>
