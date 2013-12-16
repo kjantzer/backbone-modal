@@ -356,7 +356,8 @@ perspective effects (not including the modals and the overlay).
   perspective: 600px;
 }
 .md-modal.flex {
-  position: absolute;
+  position: fixed;
+  z-index: 1010;
   top: 0;
   left: 0;
   width: 100%;
