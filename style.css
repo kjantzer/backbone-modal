@@ -418,11 +418,11 @@ perspective effects (not including the modals and the overlay).
   -ms-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 }
-.md-modal > div.thin {
+.md-modal.thin > div {
   max-width: 250px;
 }
-.md-modal > div.centered,
-.md-modal > div.centered .buttons {
+.md-modal.centered,
+.md-modal.centered .buttons {
   text-align: center;
 }
 .md-show > div {
@@ -709,6 +709,7 @@ color: #fff;
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
+  position: absolute;
 }
 .md-effect-7 .md-content {
   -webkit-transform: translateY(-200%);

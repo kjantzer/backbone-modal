@@ -289,7 +289,7 @@
 		
 		width: function(val){
 			this.options.w = val;
-			this.$el.css({
+			this.$content.css({
 				width: val,
 				maxWidth: val
 			});
@@ -337,10 +337,10 @@
 /*
 	Spinner
 */
-	window.Modal.spinner = function(){ new Modal({
+	window.Modal.spinner = function(msg){ new Modal({
 		title: 'spin',
 		effect: 1,
-		msg:false,
+		msg:msg?msg:false,
 		btns: false
 	})}
 
@@ -357,6 +357,42 @@
 		return new Modal({
 			effect: 3,
 			title: title,
+			msg: msg,
+			btns: 'ok',
+			theme: 'centered thin'
+		})
+	}
+	
+/*
+	Alert
+*/
+	window.Modal.success = function(title, msg){
+		
+		var args = defaultArgs(arguments, null, null);
+	
+		if( args ) return window.Modal.success.apply(this, args);
+	
+		return new Modal({
+			effect: 3,
+			title: title==null?'Success':title,
+			msg: msg,
+			btns: 'ok',
+			theme: 'centered thin'
+		})
+	}
+	
+/*
+	Alert
+*/
+	window.Modal.error = function(title, msg){
+		
+		var args = defaultArgs(arguments, null, null);
+	
+		if( args ) return window.Modal.error.apply(this, args);
+		
+		return new Modal({
+			effect: 3,
+			title: title==null?'Error':title,
 			msg: msg,
 			btns: 'ok',
 			theme: 'centered thin'
