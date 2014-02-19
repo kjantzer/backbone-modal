@@ -3,6 +3,8 @@
     
     Based on work done by Manoela Ilic (http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/)
     
+    Requires Animate.css for attention getters (http://daneden.github.io/animate.css/)
+    
     @author Kevin Jantzer
     @since 2013-09-04
     
@@ -94,7 +96,7 @@
 			theme: '',
 			w: null, 
 			hide: false, 
-			hideMessage:'Don\'t show again',
+			hideMessage:'Don’t show again',
 			key: '' // will save to User.settings().get('modal') if hide is checked on close. e.g. 
 		},
 		
@@ -192,10 +194,12 @@
 				this.$content.show();
 			
 			
-			if( this.options.msg instanceof Backbone.View )
-				this.$content.html( this.options.msg.$el );
-			else	
+			if( this.options.msg instanceof Backbone.View ){
+				this.options.msg.modal = this;
+				this.$content.html( this.options.msg.render().$el );
+			}else{	
 				this.$content.html( this.options.msg );
+			}
 		},
 		
 		renderBtns: function(){
@@ -261,6 +265,21 @@
 			return this;
 		},
 		
+		// requires Animate.css <http://daneden.github.io/animate.css/>
+		attention: function(animation){
+			var self = this;
+			this.$el.removeClass('animated '+(this.lastAttentionAnimation?this.lastAttentionAnimation:''));
+			this.lastAttentionAnimation = animation;
+			_.defer(function(){ self.$el.addClass('animated '+animation) })
+		},
+		
+			shake: function(){  this.attention('shake'); },
+			wobble: function(){  this.attention('wobble'); },
+			pulse: function(){  this.attention('pulse'); },
+			bounce: function(){  this.attention('bounce'); },
+			flash: function(){  this.attention('flash'); },
+			swing: function(){  this.attention('swing'); },
+			tada: function(){  this.attention('tada'); },
 		
 		setTitle: function(title){
 			this.options.title = title;
@@ -337,7 +356,7 @@
 /*
 	Spinner
 */
-	window.Modal.spinner = function(msg){ new Modal({
+	window.Modal.spinner = function(msg){ return new Modal({
 		title: 'spin',
 		effect: 1,
 		msg:msg?msg:false,

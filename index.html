@@ -31,7 +31,7 @@
 <script src="src/Modal.js"></script>
 
 <style>
-#demos > .btn {
+.demos > .btn {
 	margin-bottom: .5em;
 }
 </style>
@@ -69,7 +69,7 @@
 	<br>
 	
 	
-	<div id="demos" class="clearfix panel">
+	<div class="demos clearfix panel">
 		
 		
 		<h4>Alerts</h4>
@@ -91,6 +91,22 @@
 		
 		
 		<br><br>
+		<h4>Extras</h4>
+		
+		<a class="btn btn-primary" onclick="demo.alertProgress()">Alert with progress</a>
+		<a class="btn btn-primary" onclick="demo.alertProgress('Please be patient :)')">Alert with progress & msg</a>
+		<a class="btn btn-primary" onclick="demo.alertAttentionGetters()">Attention Getters</a>
+		
+		
+		<br><br>
+		<p>If you include <a href="http://fgnass.github.io/spin.js/" target="_blank">spin.js</a>, you can easily create a waiting spinner</p>
+		<a class="btn btn-primary" onclick="demo.spinner()">Spinner</a>
+		
+	</div>
+	
+	
+	<div class="demos clearfix panel">
+	
 		<h4>Transition Effects</h4>
 		
 		
@@ -113,18 +129,7 @@
 		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(17)">Let me in</a> -->
 		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(18)">Make way!</a> -->
 		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(19)">Slip from top</a> -->
-		
-		
-		<br><br>
-		<h4>Extras</h4>
-		
-		<a class="btn btn-primary" onclick="demo.alertProgress()">Alert with progress</a>
-		<a class="btn btn-primary" onclick="demo.alertProgress('Please be patient :)')">Alert with progress & msg</a>
-		
-		<br><br>
-		<p>If you include <a href="http://fgnass.github.io/spin.js/" target="_blank">spin.js</a>, you can easily create a waiting spinner</p>
-		<a class="btn btn-primary" onclick="demo.spinner()">Spinner</a>
-		
+	
 	</div>
 	
 	<br>
@@ -178,6 +183,8 @@ new Modal({
 	
 	<small>Built by Kevin Jantzer, Blackstone Audio Inc. 
 		Transitions based on the work done by <a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/">Manoela Ilic</a>.</small>
+		
+		<br><br>
 	
 	</div>
 
@@ -250,6 +257,25 @@ var demo = {
 		setTimeout(function(){
 			Modal.close() // closes all modals
 		}, 1200)
+	},
+	
+	alertAttentionGetters: function(){
+		
+		var m = new Modal({
+			title: 'Attention Getters',
+			msg: 'You can use theses attention getters to inform users of warnings and errors.<br>Animations are provided by <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a><br><br><b>Example:</b>\
+<pre><code>var m = new Modal({title: \'Testing\'});'+"\n"+'m.bounce();</code></pre>',
+			btns: [
+				{label: 'Bounce', className: 'btn-primary', onClick: function(){ m.bounce(); }},
+				{label: 'Wobble', className: 'btn-primary', onClick: function(){ m.wobble(); }},
+				{label: 'Shake', className: 'btn-primary', onClick: function(){ m.shake(); }},
+				{label: 'Swing', className: 'btn-primary', onClick: function(){ m.swing(); }},
+				{label: 'Tada', className: 'btn-primary', onClick: function(){ m.tada(); }},
+				{label: 'Pulse', className: 'btn-primary', onClick: function(){ m.pulse(); }},
+				'close'
+			]
+		})
+		
 	},
 	
 	modalEffect: function(effect){
