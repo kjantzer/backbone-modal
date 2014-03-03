@@ -59,18 +59,20 @@
   </div><!-- /.container -->
 </div><!-- /.navbar -->
 
-<a href="https://github.com/kjantzer/backbonejs-modal-view"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/kjantzer/backbonejs-modal-view"><img style="position: fixed; top: 0; right: 0; border: 0; z-index:10" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 
 
+<div class="masthead" style="position: relative; margin-top: -20px; padding-top: 20px;">
+	<div style="background: #2c3033; height: 85%; position: absolute; top: 0; width: 100%;"></div>
+	
 <div class="container">
 	<div class="col-lg-6 col-lg-offset-3">
 	
+	<div style="color: white">
 	<h1>Backbone.js Modal View</h1>
-	<p>Create simple, Bootstrap ready, modal windows with sleek transitions.</p>
-	
-	<p>NOTE: Modal.js defaults to using cutting-edge css3 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes" target="_blank">"flexbox"</a> for the layout. This can be turned off if you wish to support older browsers. Flexbox makes the text nice and sharp.</p>
+	<p style="font-weight: 300; line-height: 1.3em; font-size: 1.5em;">Create clean, <a href="http://getbootstrap.com" style="color:white">bootstrap</a> ready, modal windows with sleek transitions and a simple API.</p>
+	</div>
 	<br>
-	
 	
 	<div class="demos clearfix panel">
 		
@@ -106,11 +108,23 @@
 		<a class="btn btn-primary" onclick="demo.spinner()">Spinner</a>
 		
 	</div>
+
+	</div>
+</div>
+</div>
+
+<br>
+
+<div class="container">
+	<div class="col-lg-6 col-lg-offset-3">
 	
+	<p>NOTE: Modal.js defaults to using cutting-edge css3 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes" target="_blank">"flexbox"</a> for the layout. This can be turned off if you wish to support older browsers. Flexbox makes the text nice and sharp.</p>
+	<br>
 	
-	<div class="demos clearfix panel">
+
+	<div class="demos clearfix">
 	
-		<h4>Transition Effects</h4>
+		<h3>Transition Effects</h3>
 		
 		
 		<a class="btn btn-primary" onclick="demo.modalEffect(1)">Fade In & Scale</a>
@@ -210,7 +224,7 @@ var demo = {
 	alertLong: function(){
 		new Modal({
 			title: 'Alert Title', 
-			msg: '<p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p>'});
+			msg: '<p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p><p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p>'});
 	},
 	
 	
