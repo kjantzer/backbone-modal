@@ -35,8 +35,25 @@
 
 	var USE_FLEX = true; // set to false if you want to support IE and/or older versions of modern browsers.
 
-	var ModalController, Modal, modalController, SPEED = 300 /* keep in sync with CSS */;
+	var ModalController, Modal, modalController, SPINNER = null, SPEED = 300 /* keep in sync with CSS */;
 	
+	var defaultSettings = {
+		effect: 1,
+		title: '',
+		msg: '',
+		btns: ['close'],
+		theme: '',
+		w: null, 
+		hide: false, 
+		hideMessage:'Don’t show again',
+		key: '' // will save to User.settings().get('modal') if hide is checked on close. e.g. 
+	}
+	
+	var KEY_CODE_MAP = {
+		27: 'esc',
+		13: 'enter',
+		8: 'delete'
+	}
 	
 	ModalController = Backbone.View.extend({
 		
@@ -88,23 +105,11 @@
 			'click .md-close': 'close'
 		},
 		
-		opts: {
-			effect: 1,
-			title: '',
-			msg: '',
-			btns: ['close'],
-			theme: '',
-			w: null, 
-			hide: false, 
-			hideMessage:'Don’t show again',
-			key: '' // will save to User.settings().get('modal') if hide is checked on close. e.g. 
-		},
-		
 		controller: new ModalController(),
 		
 		initialize: function(){
 		
-			this.options = _.extend({}, this.opts, this.options||{});
+			this.options = _.extend({}, window.Modal.defaultSettings, this.options||{});
 			
 			this.$el.html('<div><div class="md-content"><h3></h3>\
 							<div class="progress"><div class="progress-bar"></div></div>\
@@ -146,6 +151,10 @@
 			
 		},
 		
+		isActiveModal: function(){
+			return this == _.last(this.controller.modals)
+		},
+		
 		open: function(opts){
 
 			this.render();
@@ -162,6 +171,10 @@
 			var self = this;
 			
 			this.trigger('close');
+			
+			_.each(this._eventKeyFns, function(fn){
+				window.removeEventListener('keyup', fn)
+			})
 			
 			setTimeout(function(){
 				self.controller.remove(self);
@@ -234,11 +247,11 @@
 				opts = opts.call(this);
 		
 			if( opts === 'close' )
-				opts = {label: 'Close', className: 'subtle md-close'};
+				opts = {label: 'Close', className: 'subtle md-close', eventKey:this.options.btns.length==1?['esc','enter']:'esc'};
 			else if( opts === 'cancel' )
-				opts = {label: 'Cancel', className: 'subtle md-close', onClick: this.triggerCancel.bind(this)};
+				opts = {label: 'Cancel', className: 'subtle md-close', eventKey:'esc', onClick: this.triggerCancel.bind(this)};
 			else if( opts === 'ok' )
-				opts = {label: 'Ok', className: 'subtle md-close'};
+				opts = {label: 'Ok', className: 'subtle md-close', eventKey:['esc','enter']};
 		
 			opts = _.extend({
 				label: 'Button',
@@ -249,8 +262,37 @@
 			
 			if( opts.onClick )
 				$btn.bind('click', function(e){ _.defer(function(){ opts.onClick(e) }) });
+			
+			// if event key is set, then listen for that keyup event
+			if( opts.eventKey )
+			{
+				var eventKeyFn = this._eventKeyFn.bind(this, opts.eventKey, $btn); // custom event function for this btn
+				this._eventKeyFns = this._eventKeyFns || [];
+				this._eventKeyFns.push(eventKeyFn);				// remember this function so we can unbind it later
+				window.addEventListener('keyup', eventKeyFn);	// call this event function on keyup
+			}
 				
 			return $btn;
+		},
+		
+		//_eventKeyFns: [], // holds all event key functions so we can remove them upon close; not initialized here as we want Modals to store their own
+		
+		_eventKeyFn: function(eventKey, $btn, e){
+		
+			var keyCodeStr = KEY_CODE_MAP[e.which]; // map the key code to a string
+			
+			if( !keyCodeStr ) return; // no key code string found? 
+			
+			if( _.isString(eventKey) )	// convert event key to an array if need be
+				eventKey = [eventKey];
+		
+			// if this modal is the active (on top of the rest) and user hit the proper even key, trigger a click on the button
+			if( this.isActiveModal() && _.indexOf(eventKey, keyCodeStr) > -1 ){
+				$btn.click();
+				
+				e.preventDefault();
+				return false;
+			}
 		},
 		
 		triggerCancel: function(){
@@ -259,6 +301,7 @@
 		
 		spinner: function(){
 			var self = this;
+			this.$el.addClass('spinner');
 			_.defer(function(){		// we defer so the auto centering of the spinner works
 				self.$title.spin();
 			})
@@ -352,16 +395,27 @@
 	window.Modal = function(opts){ return new Modal(opts) }
 	window.Modal.close = function(opts){ modalController.closeAll() }
 	
+	window.Modal.defaultSettings = defaultSettings;
 	
 /*
 	Spinner
 */
-	window.Modal.spinner = function(msg){ return new Modal({
-		title: 'spin',
-		effect: 1,
-		msg:msg?msg:false,
-		btns: false
-	})}
+	window.Modal.spinner = function(msg){
+		if( msg === false || msg === 'close'){
+			
+			if( SPINNER ) SPINNER.close();
+			SPINNER = null;
+			
+		}else{
+				
+			return SPINNER = new Modal({
+				title: 'spin',
+				effect: 1,
+				msg:msg?msg:false,
+				btns: false
+			});
+		}
+	}
 
 	
 /*
@@ -434,7 +488,8 @@
 			btns: [{
 				label: 'Ok',
 				className: 'green btn-primary icon-ok md-close',
-				onClick: callback||function(){alert('Please provide a callback')}
+				onClick: callback||function(){alert('Please provide a callback')},
+				eventKey: 'enter'
 			}, 'cancel']
 		})
 	}
@@ -455,7 +510,8 @@
 			btns: [{
 				label: 'Delete',
 				className: 'red btn-danger icon-trash md-close',
-				onClick: callback||function(){alert('Please provide a callback')}
+				onClick: callback||function(){alert('Please provide a callback')},
+				eventKey: 'enter'
 			}, 'cancel']
 		})
 	}
