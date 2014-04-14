@@ -255,10 +255,11 @@
 		
 			opts = _.extend({
 				label: 'Button',
-				className: 'subtle'
+				className: 'subtle',
+				attr: {}
 			}, opts);
 			
-			$btn = $('<a class="button large flat btn btn-default '+opts.className+'">'+opts.label+'</a>');
+			$btn = $('<a class="button large flat btn btn-default '+opts.className+'" title="'+(opts.attr.title||'')+'">'+opts.label+'</a>');
 			
 			if( opts.onClick )
 				$btn.bind('click', function(e){ _.defer(function(){ opts.onClick(e) }) });

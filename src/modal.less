@@ -270,6 +270,12 @@ color: #fff;
 				padding: 5px 0;
 			}
 			
+			code {
+				display: inline-block;
+				overflow: hidden;
+				vertical-align: middle;
+			}
+			
 		}
 		
 		
@@ -371,6 +377,18 @@ color: #fff;
 			padding-bottom: 0;
 			padding-top: 0px;
 			font-weight: bold;
+		}
+		
+		.progress {
+			height: 2px;
+			top: calc(~"100% - 2.85em");
+			
+			.progress-bar {
+				background: @btn-color-blue;
+				background: #3498db;
+				.box-shadow(none);
+				.rounded(0);
+			}
 		}
 		
 		> div {

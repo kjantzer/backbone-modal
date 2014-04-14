@@ -2809,23 +2809,29 @@ perspective effects (not including the modals and the overlay).
   -ms-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 }
-.md-modal.thin > div {
-  max-width: 250px;
+.md-modal.spinner {
+  z-index: 1020;
 }
-.md-modal.centered,
-.md-modal.centered .buttons {
-  text-align: center;
+.md-modal.spinner > div {
+  min-width: 70px;
 }
-.md-modal.btn-select {
-  text-align: center;
+.md-modal.spinner .md-content {
+  padding: 0 !important;
+  background: #333 !important;
+  color: #fff;
+  -webkit-box-shadow: #ffffff 0 0 1px !important;
+  -moz-box-shadow: #ffffff 0 0 1px !important;
+  box-shadow: #ffffff 0 0 1px !important;
 }
-.md-modal.btn-select > div {
-  max-width: 280px;
+.md-modal.spinner h3 {
+  color: #fff !important;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
 }
-.md-modal.btn-select .buttons .button {
-  display: block;
-  text-align: center;
-  margin-bottom: 5px;
+.md-modal .btn.large,
+.md-modal .btn.large:visited {
+  font-size: 1em;
+  border-width: 1px;
 }
 .md-show > div {
   visibility: visible;
@@ -2936,6 +2942,11 @@ color: #fff;
 .md-content > div .content ul li {
   padding: 5px 0;
 }
+.md-content > div .content code {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
 .md-content > div > .buttons {
   position: relative;
   text-align: right;
@@ -2976,6 +2987,134 @@ color: #fff;
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+}
+/*
+	Themes
+*/
+.md-modal.thin > div {
+  max-width: 250px;
+}
+.md-modal.centered,
+.md-modal.centered .buttons {
+  text-align: center;
+}
+.md-modal.btn-select {
+  text-align: center;
+}
+.md-modal.btn-select > div {
+  max-width: 280px;
+}
+.md-modal.btn-select .buttons .button {
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+}
+.md-modal.ios7 .md-content {
+  background: rgba(245, 245, 245, 0.97);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  text-align: center;
+  font-size: 1.2em;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  padding-top: 30px;
+}
+.md-modal.ios7 .md-content h3 {
+  background: none;
+  padding-bottom: 0;
+  padding-top: 0px;
+  font-weight: bold;
+}
+.md-modal.ios7 .md-content .progress {
+  height: 2px;
+  top: calc(100% - 2.85em);
+}
+.md-modal.ios7 .md-content .progress .progress-bar {
+  background: #2980b9;
+  background: #3498db;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.md-modal.ios7 .md-content > div .content {
+  padding-top: 5px;
+}
+.md-modal.ios7 .md-content > div > .buttons {
+  overflow: hidden;
+  border-top: solid 1px #ccc;
+  -webkit-border-top-right-radius: 0;
+  -webkit-border-bottom-right-radius: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topright: 0;
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button {
+  flex: 1;
+  text-align: center;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background: transparent !important;
+  border: none;
+  color: #2980b9 !important;
+  border-right: solid 1px #ccc;
+  line-height: 2em;
+  margin: 0;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button:first-child {
+  border-right: none;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button:before {
+  line-height: 1.5em;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button:hover {
+  background: transparent !important;
+  color: #2980b9;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button.red {
+  color: #c0392b !important;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button.green {
+  color: #27ae60 !important;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button.orange {
+  color: #f39c12 !important;
+}
+.md-modal.ios7 .md-content > div > .buttons > .button:active {
+  background: #eef1f2 !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.md-modal.ios7 ~ .md-overlay {
+  background: rgba(0, 0, 0, 0.2);
 }
 /* Individual modal styles with animations/transitions */
 /* Effect 1: Fade in and scale up */
