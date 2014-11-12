@@ -3,6 +3,8 @@
 
 <title>Backbone.js Modal View</title>
 
+<meta charset="utf-8"> 
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -94,6 +96,11 @@
 		<a class="btn btn-primary" onclick="demo.confirmCancelCallback()">Confirm with cancel callback</a>
 		<a class="btn btn-danger" onclick="demo.confirmDelete()">Confirm Delete</a>
 		
+		<br><br>
+		<h4>Prompts</h4>
+		
+		<a class="btn btn-primary" onclick="demo.prompt()">Prompt</a>
+		<a class="btn btn-primary" onclick="demo.promptColor()">Prompt Color</a>
 		
 		<br><br>
 		<h4>Extras</h4>
@@ -266,6 +273,20 @@ var demo = {
 	confirmDelete: function(){
 		Modal.confirmDelete(function(){
 			alert('You have confirmed the deletion of an item!')
+		})
+	},
+
+	prompt: function(){
+		Modal.prompt('What’s your name?', '', {}, function(val){
+			setTimeout(function(){
+				alert('Hello '+val);
+			},0);
+		})
+	},
+
+	promptColor: function(){
+		Modal.prompt('Background Color', '', {pattern: 'hexcode', val: 'ffffff', placeholder: 'FFFFFF'}, function(val){
+			document.body.style.backgroundColor = val;
 		})
 	},
 	

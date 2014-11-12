@@ -407,7 +407,7 @@
 			if( SPINNER ) SPINNER.close();
 			SPINNER = null;
 			
-		}else{
+		}else if( !SPINNER ){
 				
 			return SPINNER = new Modal({
 				title: 'spin',
@@ -433,7 +433,7 @@
 			title: title,
 			msg: msg,
 			btns: 'ok',
-			theme: 'centered thin'
+			theme: 'centered thin ios7'
 		})
 	}
 	
@@ -451,7 +451,7 @@
 			title: title==null?'Success':title,
 			msg: msg,
 			btns: 'ok',
-			theme: 'centered thin'
+			theme: 'centered thin ios7'
 		})
 	}
 	
@@ -469,7 +469,7 @@
 			title: title==null?'Error':title,
 			msg: msg,
 			btns: 'ok',
-			theme: 'centered thin'
+			theme: 'centered thin ios7'
 		})
 	}
 	
@@ -486,6 +486,7 @@
 		return new Modal({
 			title: title==null?'Continue?':title,
 			msg: msg==null?'Are you sure you want to delete this?':msg,
+			theme: 'ios7',
 			btns: [{
 				label: 'Ok',
 				className: 'green btn-primary icon-ok md-close',
@@ -508,6 +509,7 @@
 		return new Modal({
 			title: title==null?'Delete?':title,
 			msg: msg==null?'Are you sure you want to delete this?':msg,
+			theme: 'ios7',
 			btns: [{
 				label: 'Delete',
 				className: 'red btn-danger icon-trash md-close',
@@ -518,6 +520,70 @@
 	}
 	
 	
+/*
+	Prompt
+*/
+	window.Modal.prompt = function(title, msg, opts, callback){
+		
+		var defaultOpts = {
+			placeholder: 'Enter value...',
+			val: '',
+			pattern: null // a regex
+		}
+
+		var args = defaultArgs(arguments, null, null, defaultOpts, null);
+	
+		if( args ) return window.Modal.prompt.apply(this, args);
+
+		opts = _.extend(defaultOpts, opts);
+
+		var regex = opts.pattern;
+
+		switch(regex){
+			case 'hexcode': regex = '^#?[A-Za-z0-9]{6}$'; break;
+		}
+
+		regex = regex ? RegExp(regex) : null;
+
+		msg = msg || '';
+		msg += '<input value="'+opts.val+'" placeholder="'+opts.placeholder+'" class="prompt" type="text">';
+
+		var modal = new Modal({
+			title: title,
+			msg: msg,
+			theme: 'ios7',
+			btns: [{
+				label: 'Ok',
+				className: 'green btn-primary icon-ok',
+				onClick: function(e){
+
+					if( !callback )
+						return alert('Please provide a callback');
+					
+					var val = modal.$('.prompt').val();
+
+					if( regex && !regex.test(val) ){
+						modal.shake();
+					}else{
+
+						if( opts.pattern == 'hexcode' && val.charAt(0) !== '#')
+							val = '#'+val;
+
+						callback(val, e)
+						modal.close();
+					}
+						
+				},
+				eventKey: 'enter'
+			}, 'cancel']
+		})
+
+		setTimeout(function(){
+			modal.$('.prompt').focus().select();
+		},250);
+
+		return modal;
+	}
 
 
 /*

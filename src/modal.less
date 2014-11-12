@@ -275,6 +275,12 @@ color: #fff;
 				overflow: hidden;
 				vertical-align: middle;
 			}
+
+			input.prompt {
+				margin: 0;
+				width: 100%;
+				padding: 10px;
+			}
 			
 		}
 		
@@ -325,6 +331,76 @@ color: #fff;
 		.rounded(2px);
 	}
 	
+	
+	
+	
+.search-view {
+	margin: -30px -30px -15px -30px;
+	width: 400px;
+	text-align: left;
+}
+	
+	
+/*
+	Search Bar
+*/
+	.search-bar {
+		position: relative;
+		//.gradient(#ddd,#ddd,#eee);
+		background: rgba(0,0,0,0.04);
+		padding: 0px 5px 2px;
+		border-bottom: solid 1px #bbb;
+		height: 31px;
+		
+		input {
+			width: 100%;
+		}
+		
+		.spin-wrapper {
+			position: absolute;
+			right: 19px;
+			top: 18px;
+		}
+	
+	}
+ 
+ 
+/*
+	Search Results
+*/
+	.search-results {
+		height: 300px;
+		overflow-y: auto;
+		margin: 0 !important;
+		padding: 0 !important;
+		background: #fff;
+		
+		&:empty {
+			border-bottom: solid 1px #eee;
+			margin-top: -1px;
+		}
+		
+		// non-results message
+		> p {
+			padding: .5em !important;
+			line-height: 1.5em;
+			text-transform: none;
+		}
+	
+		> li {
+			padding: 10px 10px !important;
+			margin: 1px !important;
+		
+			&.active{
+				background: #eee;
+				
+				.cursive { color: #bbb; }
+			}
+		}
+	}
+	
+	
+	
 }
 
 .md-color(@color){
@@ -343,6 +419,7 @@ color: #fff;
 
 // THIN
 .md-modal.thin > div { max-width: 250px; }
+.md-modal.thin.ios7 > div { max-width: 320px; }
 
 // CENTERED	
 .md-modal.centered,
@@ -374,9 +451,9 @@ color: #fff;
 		
 		h3 {
 			background: none;
-			padding-bottom: 0;
+			//padding-bottom: 0;
 			padding-top: 0px;
-			font-weight: bold;
+			//font-weight: bold;
 		}
 		
 		.progress {
@@ -420,8 +497,9 @@ color: #fff;
 						border-right: none;
 					}
 					
+					// icon
 					&:before {
-						line-height: 1.5em;
+						line-height: 1.9em;
 					}
 					
 					&:hover {

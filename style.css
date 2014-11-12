@@ -2869,6 +2869,12 @@ color: #fff;
   -moz-box-shadow: #dddddd 0 1px 0px 1px;
   box-shadow: #dddddd 0 1px 0px 1px;
   border-radius: 3px;
+  /*
+	Search Bar
+*/
+  /*
+	Search Results
+*/
 }
 .md-content h1.divider > span,
 .md-content h2.divider > span,
@@ -2988,11 +2994,60 @@ color: #fff;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
+.md-content .search-view {
+  margin: -30px -30px -15px -30px;
+  width: 400px;
+  text-align: left;
+}
+.md-content .search-bar {
+  position: relative;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0px 5px 2px;
+  border-bottom: solid 1px #bbb;
+  height: 31px;
+}
+.md-content .search-bar input {
+  width: 100%;
+}
+.md-content .search-bar .spin-wrapper {
+  position: absolute;
+  right: 19px;
+  top: 18px;
+}
+.md-content .search-results {
+  height: 300px;
+  overflow-y: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #fff;
+}
+.md-content .search-results:empty {
+  border-bottom: solid 1px #eee;
+  margin-top: -1px;
+}
+.md-content .search-results > p {
+  padding: .5em !important;
+  line-height: 1.5em;
+  text-transform: none;
+}
+.md-content .search-results > li {
+  padding: 10px 10px !important;
+  margin: 1px !important;
+}
+.md-content .search-results > li.active {
+  background: #eee;
+}
+.md-content .search-results > li.active .cursive {
+  color: #bbb;
+}
 /*
 	Themes
 */
 .md-modal.thin > div {
   max-width: 250px;
+}
+.md-modal.thin.ios7 > div {
+  max-width: 320px;
 }
 .md-modal.centered,
 .md-modal.centered .buttons {
@@ -3092,7 +3147,7 @@ color: #fff;
   border-right: none;
 }
 .md-modal.ios7 .md-content > div > .buttons > .button:before {
-  line-height: 1.5em;
+  line-height: 1.9em;
 }
 .md-modal.ios7 .md-content > div > .buttons > .button:hover {
   background: transparent !important;
