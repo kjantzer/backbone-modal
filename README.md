@@ -2,7 +2,7 @@
 
 Create simple modal windows with sleek transitions. Modal.js is Bootstrap ready.
 
-![preview](http://i.imgur.com/ncOZzqw.png)
+![preview](http://i.imgur.com/ZWHsJVZ.png)
 
 ### Requires
 - LESS
@@ -13,23 +13,27 @@ Use
 ---
 #### Normal
 
-    Modal({
-		title: 'Modal Title',
-    	msg: 'This is the message for the modal.'
-    });
-    
+```javascript
+Modal({
+	title: 'Modal Title',
+	msg: 'This is the message for the modal.'
+});
+```
+
 #### Presets
 
-	Modal.alert('Title', 'The message');
-	Modal.alert('Title Only', '');
-	Modal.alert('Message Only');
-	
-	Modal.confirm('Title', 'The message', function(){
-		alert('user confirmed');
-	});
-	
-	Modal.confirmDelete(function(){
-		alert('user confirmed delete');
-	});
-	
-	Modal.spinner(); // requires spin.js
+```javascript
+Modal.alert('Title', 'The message');
+Modal.alert('Title Only', '');
+Modal.alert('Message Only');
+
+Modal.confirm('Title', 'The message', function(){
+	alert('user confirmed');
+});
+
+Modal.confirmDelete(function(){
+	alert('user confirmed delete');
+});
+
+Modal.spinner(); // requires spin.js
+```
