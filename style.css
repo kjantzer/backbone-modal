@@ -2699,6 +2699,8 @@ p.divider.dashed:before {
 /*
 	Flexbox Mixins
 	https://gist.github.com/kjantzer/7948269
+
+	Help: http://css-tricks.com/snippets/css/a-guide-to-flexbox/
 */
 .display-flex {
   display: -webkit-box;
@@ -2953,6 +2955,13 @@ color: #fff;
   overflow: hidden;
   vertical-align: middle;
 }
+.md-content > div .content input.prompt,
+.md-content > div .content textarea.prompt {
+  margin: 1em 0 0 0;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
 .md-content > div > .buttons {
   position: relative;
   text-align: right;
@@ -3081,9 +3090,7 @@ color: #fff;
 }
 .md-modal.ios7 .md-content h3 {
   background: none;
-  padding-bottom: 0;
   padding-top: 0px;
-  font-weight: bold;
 }
 .md-modal.ios7 .md-content .progress {
   height: 2px;

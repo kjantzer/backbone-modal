@@ -101,6 +101,7 @@
 		
 		<a class="btn btn-primary" onclick="demo.prompt()">Prompt</a>
 		<a class="btn btn-primary" onclick="demo.promptColor()">Prompt Color</a>
+		<a class="btn btn-primary" onclick="demo.promptTextarea()">Prompt Textarea</a>
 		
 		<br><br>
 		<h4>Extras</h4>
@@ -287,6 +288,19 @@ var demo = {
 	promptColor: function(){
 		Modal.prompt('Background Color', '', {pattern: 'hexcode', val: 'ffffff', placeholder: 'FFFFFF'}, function(val){
 			document.body.style.backgroundColor = val;
+		})
+	},
+
+	promptTextarea: function(){
+		var opts = {
+			placeholder: 'Tell us how you really feel...',
+			h: 100
+		};
+
+		Modal.prompt('Tell us', 'Write us a little blurb', opts, function(val){
+			setTimeout(function(){
+				alert('You said: '+val);
+			},0);
 		})
 	},
 	
