@@ -1,0 +1,45 @@
+/*
+	Flexbox Mixins
+	https://gist.github.com/kjantzer/7948269
+
+	Help: http://css-tricks.com/snippets/css/a-guide-to-flexbox/
+*/
+ 
+// container
+.display-flex {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+ 
+// container
+.align-items(@align:center){
+	-webkit-box-align: @align;
+	-webkit-align-items: @align;
+	-moz-box-align: @align;
+	-ms-flex-align: @align;
+	align-items: @align;
+}
+	
+.justify-content(@align:center){
+	-webkit-box-pack: @align;
+	-webkit-justify-content: @align;
+	-moz-box-pack: @align;
+	-ms-flex-pack: @align;
+	justify-content: @align;
+}	
+ 
+.flex-wrap(@wrap:wrap){
+	-webkit-flex-wrap: @wrap;
+	-moz-flex-wrap: @wrap;
+	flex-wrap: @wrap;
+}
+ 
+// container
+.flex-direction(@direction:row){
+	-webkit-flex-direction: @direction;
+	-moz-flex-direction: @direction;
+	flex-direction: @direction;
+}

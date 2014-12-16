@@ -526,9 +526,11 @@
 	window.Modal.prompt = function(title, msg, opts, callback){
 		
 		var defaultOpts = {
+			okBtn: 'Ok',
 			placeholder: 'Enter value...',
 			val: '',
-			pattern: null // a regex
+			pattern: null, // a regex
+			h: null // add height for textarea
 		}
 
 		var args = defaultArgs(arguments, null, null, defaultOpts, null);
@@ -537,23 +539,29 @@
 
 		opts = _.extend(defaultOpts, opts);
 
+		var useTextarea = opts.h > 0;
 		var regex = opts.pattern;
 
 		switch(regex){
 			case 'hexcode': regex = '^#?[A-Za-z0-9]{6}$'; break;
+			case 'string': regex = '^.+'; break;
 		}
 
 		regex = regex ? RegExp(regex) : null;
 
 		msg = msg || '';
-		msg += '<input value="'+opts.val+'" placeholder="'+opts.placeholder+'" class="prompt" type="text">';
+		
+		if( useTextarea )
+			msg += '<textarea placeholder="'+opts.placeholder+'" class="prompt" style="height: '+opts.h+'px">'+opts.val+'</textarea>';
+		else
+			msg += '<input value="'+opts.val+'" placeholder="'+opts.placeholder+'" class="prompt" type="text">';
 
 		var modal = new Modal({
 			title: title,
 			msg: msg,
 			theme: 'ios7',
 			btns: [{
-				label: 'Ok',
+				label: opts.okBtn,
 				className: 'green btn-primary icon-ok',
 				onClick: function(e){
 
@@ -574,7 +582,7 @@
 					}
 						
 				},
-				eventKey: 'enter'
+				eventKey: useTextarea ? null : 'enter'
 			}, 'cancel']
 		})
 
