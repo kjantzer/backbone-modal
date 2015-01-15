@@ -527,6 +527,7 @@
 		
 		var defaultOpts = {
 			okBtn: 'Ok',
+			password: false,
 			placeholder: 'Enter value...',
 			val: '',
 			pattern: null, // a regex
@@ -554,7 +555,7 @@
 		if( useTextarea )
 			msg += '<textarea placeholder="'+opts.placeholder+'" class="prompt" style="height: '+opts.h+'px">'+opts.val+'</textarea>';
 		else
-			msg += '<input value="'+opts.val+'" placeholder="'+opts.placeholder+'" class="prompt" type="text">';
+			msg += '<input value="'+opts.val+'" placeholder="'+opts.placeholder+'" class="prompt" type="'+(opts.password?'password':'text')+'">';
 
 		var modal = new Modal({
 			title: title,
