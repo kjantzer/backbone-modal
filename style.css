@@ -3135,7 +3135,7 @@ color: #fff;
   padding: 0;
 }
 .md-modal.ios7 .md-content > div > .buttons > .button {
-  flex: 1;
+  flex-grow: 1;
   text-align: center;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
