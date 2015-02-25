@@ -1,8 +1,8 @@
-#Modal Backbone View
+#Backbone Modal
 
 Create simple modal windows with sleek transitions. Modal.js is Bootstrap ready.
 
-![preview](http://i.imgur.com/ncOZzqw.png)
+![Preview](http://i.imgur.com/kYPpSPN.png)
 
 ### Requires
 - LESS
