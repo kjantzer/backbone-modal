@@ -413,7 +413,8 @@
 				title: 'spin',
 				effect: 1,
 				msg:msg?msg:false,
-				btns: false
+				btns: false,
+				theme: 'ios7'
 			});
 		}
 	}
