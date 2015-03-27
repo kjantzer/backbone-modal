@@ -394,7 +394,7 @@
 	
 	
 	window.Modal = function(opts){ return new Modal(opts) }
-	window.Modal.close = function(opts){ modalController.closeAll() }
+	window.Modal.close = function(opts){ modalController.closeAll(); SPINNER = null; }
 	
 	window.Modal.defaultSettings = defaultSettings;
 	
