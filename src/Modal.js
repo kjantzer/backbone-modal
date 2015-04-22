@@ -547,6 +547,11 @@
 		switch(regex){
 			case 'hexcode': regex = '^#?[A-Za-z0-9]{6}$'; break;
 			case 'string': regex = '^.+'; break;
+			case 'int':
+			case 'integer': regex = '^[0-9]+$'; break;
+			case 'num':
+			case 'number':
+			case 'decimal': regex = '^[0-9](\.[0-9])?+$'; break;
 		}
 
 		regex = regex ? RegExp(regex) : null;
