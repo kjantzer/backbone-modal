@@ -557,6 +557,8 @@
 		regex = regex ? RegExp(regex) : null;
 
 		msg = msg || '';
+
+		opts.val = opts.val || '';
 		
 		if( useTextarea )
 			msg += '<textarea placeholder="'+opts.placeholder+'" class="prompt" style="height: '+opts.h+'px">'+opts.val+'</textarea>';
