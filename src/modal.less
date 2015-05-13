@@ -549,11 +549,17 @@ color: #fff;
 				overflow: hidden;
 				border-top: solid 1px #ccc;
 				.border-radius(0, 8px, 8px, 0);
+				display: -webkit-flex;
+				display: -moz-flex;
 				display: flex;
+				-webkit-flex-direction: row-reverse;
+				-moz-flex-direction: row-reverse;
 				flex-direction: row-reverse;
 				padding: 0;
 				
 				> .button {
+					-webkit-flex-grow: 1;
+					-moz-flex-grow: 1;
 					flex-grow: 1;
 					text-align: center;
 					.rounded(0);
