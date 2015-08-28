@@ -552,6 +552,7 @@
 			case 'num':
 			case 'number':
 			case 'decimal': regex = '^[0-9](\.[0-9])?+$'; break;
+            case 'year': regex = '^$|^[1-2]{1}[0-9]{3}$'; break;
 		}
 
 		regex = regex ? RegExp(regex) : null;
