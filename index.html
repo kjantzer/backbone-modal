@@ -1,7 +1,7 @@
 <html>
 <head>
 
-<title>Backbone.js Modal View</title>
+<title>Modal Component for Backbone.js Apps</title>
 
 <meta charset="utf-8"> 
 
@@ -16,332 +16,278 @@
 
 </script>
 
-<!-- Backbone.js Dependencies -->
-<script src="lib/jquery.min.js"></script>
-<script src="lib/underscore.min.js"></script>
-<script src="lib/backbone.min.js"></script>
-
-<!-- http://fgnass.github.io/spin.js/ -->
-<script src="lib/spin/spin.min.js"></script>
-<script src="lib/spin/jquery.spin.js"></script>
-
-<!-- Bootstrap 3 - http://getbootstrap.com -->
-<link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
-
-<!-- Panel View script -->
 <link href="style.css" rel="stylesheet" type="text/css">
-<script src="src/Modal.js"></script>
 
-<style>
-.demos > .btn {
-	margin-bottom: .5em;
-}
-</style>
+<script src="demo-build.js"></script>
 
 </head>
 <body>
 
-<div class="modal-container">
 
-<div class="navbar">
-  <div class="container">
+<a href="https://github.com/kjantzer/backbone-modal"><img style="position: fixed; top: 0; right: 0; border: 0; z-index:10" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 
-    <a class="navbar-brand" href="#">Blackstone UI Components</a>
+<header>
+    
+    <h1>Modal</h1>
+    
+    <h3>Create clean modal windows with sleek transitions and a simple API.</h3>
+    
+    <div>
+        <a class="button" onclick="Modal.alert('Hello There!', 'I’m a generalized alert modal')">Show Modal</a>
+    </div>
+    
+</header>
 
-    <ul class="nav navbar-nav">
-	  <li class=""><a href="http://kjantzer.github.io/backbonejs-list-controller-view/">List Controller</a></li>
-	  <li class=""><a href="http://kjantzer.github.io/backbonejs-panel-view/">Panel</a></li>
-	  <li class=""><a href="http://kjantzer.github.io/backbonejs-dropdown-view/">Dropdown</a></li>
-	  <li class="active"><a href="http://kjantzer.github.io/backbonejs-modal-view/">Modal</a></li>
-	  <li class=""><a href="http://kjantzer.github.io/backbonejs-model-editor-view/">Model Editor</a></li>
-	  <li class=""><a href="http://kjantzer.github.io/basic-buttons/">Basic Buttons</a></li>
-	</ul>
+<section>
+    
+    <h1>Overview</h1>
+    
+    <p><b>Version 1.0.1</b></p>
+    
+    <p>Native alert views are ugly and very limiting; this plugin was designed to replace native <code>alert()</code> and provide additional features commonly needed in apps.</p>
+    
+    <p>It has been developed with a simple and extensible API to make using modals easy.</p>
+    
+    <blockquote>
+        <p>Modal.js defaults to using cutting-edge css3 <a href="http://caniuse.com/#feat=flexbox">flexbox</a> for the layout. This can be turned off if you wish to support older browsers. Flexbox ensures the text is nice and sharp.</p>
+    </blockquote>
+    
+    
+    <hr>
+    
+    <h1>Using Modal</h1>
+    
+<pre>
+var myModal = new Modal({
+    title: '',
+    msg: '',
+    btns: ['ok'],
+    theme: 'ios7',
+    w: null,
+    effect: 1,
+})
+</pre>
+
+    <hr>
+    
+    <h1>Modal Presets</h1>
+    
+    <p>Various presets have been defined for common application actions such as "alert", "confirm", "confirmDelete", "prompt" and showing a spinner.</p>
+    
+    <p>Most of the parameters, such as <code>title</code> and <code>msg</code> can be optional and will fallback to defaults. Therefore, params are taken in order from the right.</p>
+    
+    <blockquote>
+        <p>For example, if params are <code>title, msg, callback</code> but only one parameter is given, it will be assumed as the <code>callback</code>. If two params, <code>msg</code> and <code>callback</code> are assumed, and so on.</p>
+    </blockquote>
+    
+    <br>
+    <h2><code>Modal.alert(msg)</code> or <code>Modal.alert(title, msg)</code></h2>
+    
+    <p>
+        <a class="button" onclick="Modal.alert('Alert Title', 'Display any kind of message here.')">Alert</a>
+        <a class="button" onclick="alertLong()">Alert with Long Message</a>
+    </p>
+    
+    
+    <br>
+    <h2><code>Modal.confirm(title, msg, callback)</code></h2>
+    
+    <p>Title and msg are optional; if you leave them out, defaults will be used.</p>
+    
+    <p><a class="button" onClick="confirmBtn()">Confirm</a></p>
+    
+    <script>confirmBtn=function(){
+        Modal.confirm(function(){
+            Modal.alert('You choose to confirm the action.')
+        })
+    }</script>
+    
+<pre>
+Modal.confirm(function(){
+    Modal.alert('You choose to confirm the action.')
+})
+</pre>
+
+
+    <br>
+    <h2><code>Modal.confirmDelete(title, msg, callback)</code></h2>
+
+    <p>Like confirm, title and msg are optional; if you leave them out, defaults will be used.</p>
+
+    <p><a class="button" onClick="confirmDeleteBtn()">Confirm Delete</a></p>
+
+    <script>confirmDeleteBtn=function(){
+        Modal.confirmDelete(function(){
+            Modal.alert('You choose to delete.')
+        })
+    }</script>
+
+<pre>
+Modal.confirmDelete(function(){
+    Modal.alert('You choose to delete.')
+})
+</pre>
+
+    <br>
+    <h2><code>Modal.prompt(title, msg, opts, callback)</code></h2>
+
+    <p>This preset allows for asking the user in input some data. The prompt can be set to validate based on a regexp pattern.</p>
+
+    <p>
+        <a class="button" onClick="promptBtn()">Prompt</a>
+        <a class="button" onClick="promptBtn({h:100})">Prompt Textarea</a>
+        <a class="button" onClick="promptBtn({pattern:'number', placeholder: 'Enter number'})">Prompt for Number</a>
+    </p>
+
+    <script>promptBtn=function(opts){
+        Modal.prompt('Type Anything', '', opts||{}, function(val){
+            Modal.alert('You typed:', val)
+        })
+    }</script>
+
+<pre>
+Modal.prompt('Type Anything', '', {}, function(val){
+    Modal.alert('You typed:', val)
+})
+</pre>
+
+    <p><b>Prompt Options</b></p>
+    
+<pre>
+{
+    okBtn: 'Ok',
+    password: false,
+    placeholder: 'Enter value...',
+    val: '', // prefill the input
+    pattern: null, // a regex or preset (string, integer, number, year)
+    h: null // add height for textarea
+}
+</pre>
+
+
+    <br>
+    <h2><code>Modal.spinner()</code></h2>
+
+    <p>Shows a spinner with no way to close it. Ideal when you want to show progress, but not let the user click around.</p>
+
+    <p><a class="button" onClick="spinnerBtn()">Spinner</a></p>
+
+    <script>spinnerBtn=function(){
+        Modal.spinner();
+        setTimeout(function(){ Modal.spinner(false); }, 2000);
+    }</script>
+
+<pre>
+Modal.spinner();
+
+// you can hide the spinner when ready
+Modal.spinner(false);
+</pre>
+
+    <p>You can show the spinner in a regular Modal too, by using <code>title:'spinner'</code>.</p>
+    
+    <p><a class="button" onClick="spinnerBtnMsg()">Spinner with Message</a></p>
+
+    <script>spinnerBtnMsg=function(){
+        new Modal({ title: 'spinner', msg: 'Waiting for response', btns:['cancel']})
+    }</script>
+
+<pre>
+new Modal({
+    title: 'spinner',
+    msg: 'Waiting for response',
+    btns:['cancel']
+})
+</pre>
 
     
-  </div><!-- /.container -->
-</div><!-- /.navbar -->
+    <hr>
 
-<a href="https://github.com/kjantzer/backbonejs-modal-view"><img style="position: fixed; top: 0; right: 0; border: 0; z-index:10" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <h1>Options</h1>
 
+    <h2><code>btns: ['ok']</code></h2>
+    
+    <p>Modals can have multiple buttons, each with different callback functions.</p>
 
-<div class="masthead" style="position: relative; margin-top: -20px; padding-top: 20px;">
-	<div style="background: #2c3033; height: 85%; position: absolute; top: 0; width: 100%;"></div>
-	
-<div class="container">
-	<div class="col-lg-6 col-lg-offset-3">
-	
-	<div style="color: white">
-	<h1>Modal View</h1>
-	<p style="font-weight: 300; line-height: 1.3em; font-size: 1.5em;">Create clean, <a href="http://getbootstrap.com" style="color:white">bootstrap</a> ready, modal windows with sleek transitions and a simple API.</p>
-	</div>
-	<br>
-	
-	<div class="demos clearfix panel">
-		
-		
-		<h4>Alerts</h4>
-		
-		<a class="btn btn-primary" onclick="demo.alert()">Alert</a>
-		<a class="btn btn-primary" onclick="demo.alertTitle()">Alert title only</a>
-		<a class="btn btn-primary" onclick="demo.alertMsg()">Alert msg only</a>
-		
-		<br>
-		
-		<a class="btn btn-primary" onclick="demo.alertLong()">Alert with long message</a>
-		
-		<br><br>
-		<h4>Confirms</h4>
-		
-		<a class="btn btn-primary" onclick="demo.confirm()">Confirm</a>
-		<a class="btn btn-primary" onclick="demo.confirmCancelCallback()">Confirm with cancel callback</a>
-		<a class="btn btn-danger" onclick="demo.confirmDelete()">Confirm Delete</a>
-		
-		<br><br>
-		<h4>Prompts</h4>
-		
-		<a class="btn btn-primary" onclick="demo.prompt()">Prompt</a>
-		<a class="btn btn-primary" onclick="demo.promptColor()">Prompt Color</a>
-		<a class="btn btn-primary" onclick="demo.promptTextarea()">Prompt Textarea</a>
-		
-		<br><br>
-		<h4>Extras</h4>
-		
-		<a class="btn btn-primary" onclick="demo.alertProgress()">Alert with progress</a>
-		<a class="btn btn-primary" onclick="demo.alertProgress('Please be patient :)')">Alert with progress & msg</a>
-		<a class="btn btn-primary" onclick="demo.alertAttentionGetters()">Attention Getters</a>
-		
-		
-		<br><br>
-		<p>If you include <a href="http://fgnass.github.io/spin.js/" target="_blank">spin.js</a>, you can easily create a waiting spinner</p>
-		<a class="btn btn-primary" onclick="demo.spinner()">Spinner</a>
-		
-	</div>
+<pre>
+btns: [{
+    label: 'Ok',
+    className: 'md-close', // add this class to hide modal on click
+    onClick: function(){},
+    eventKey: null, // esc, enter, delete, or null
+}]
+</pre>
 
-	</div>
-</div>
-</div>
+    <p>There is also a few button presets: <code>ok, cancel, close</code></p>
+    
+    <p>If <code>eventKey</code> is set, the <code>onClick</code> callback will be triggered when the user hits the specified key.</p>
 
-<br>
+    <p>Modal leverages <a href="https://github.com/kjantzer/basic-buttons">basic buttons</a> so you can use icons in buttons too.</p>
+    
+    <p><a class="button" onclick="iconBtn()">Modal with Icons</a></p>
+    <script>iconBtn=function(){
+        new Modal({ title: 'Modal with Icons', msg: '', btns:[
+            { label: '', className: 'md-close icon-user-add green'},
+            { label: '', className: 'md-close icon-trash red'},
+            { label: '', className: 'md-close icon-ccw'}
+        ]})
+    }</script>
 
-<div class="container">
-	<div class="col-lg-6 col-lg-offset-3">
-	
-	<p>NOTE: Modal.js defaults to using cutting-edge css3 <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes" target="_blank">"flexbox"</a> for the layout. This can be turned off if you wish to support older browsers. Flexbox makes the text nice and sharp.</p>
-	<br>
-	
+    <br>
+    <h2><code>effect: 1</code></h2>
+    
+    <p>Modal comes setup with multiple different animation styles. The deafult is <code>1</code>, or "Fade in and Scale"</p>
+    
+    <span class="spacedout">
+    <a class="button" onclick="effectBtn(1)">1: Fade in & Scale</a>
+	<a class="button" onclick="effectBtn(2)">2: Slide in (right)</a>
+	<a class="button" onclick="effectBtn(3)">3: Slide in (bottom)</a>
+	<a class="button" onclick="effectBtn(4)">4: Newspaper</a>
+	<a class="button" onclick="effectBtn(5)">5: Fall</a>
+	<a class="button" onclick="effectBtn(6)">6: Side Fall</a>
+	<a class="button" onclick="effectBtn(7)">7: Sticky Up</a>
+	<a class="button" onclick="effectBtn(8)">8: 3D Flip (horizontal)</a>
+	<a class="button" onclick="effectBtn(9)">9: 3D Flip (vertical)</a>
+	<a class="button" onclick="effectBtn(10)">10: 3D Sign</a>
+	<a class="button" onclick="effectBtn(11)">11: Super Scaled</a>
+	<a class="button" onclick="effectBtn(12)">12: Just Me</a>
+	<a class="button" onclick="effectBtn(13)">13: 3D Slit</a>
+	<a class="button" onclick="effectBtn(14)">14: 3D Rotate Bottom</a>
+	<a class="button" onclick="effectBtn(15)">15: 3D Rotate In Left</a>
+    </span>
+    
+    <script>effectBtn=function(effect){
+        new Modal({
+            title: event.currentTarget.innerText,
+            msg: 'Effect '+effect+' was used to display this modal.',
+            effect:effect,
+            btns:['ok']
+        })
+    }</script>
 
-	<div class="demos clearfix">
-	
-		<h3>Transition Effects</h3>
-		
-		
-		<a class="btn btn-primary" onclick="demo.modalEffect(1)">Fade In & Scale</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(2)">Slide in (right)</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(3)">Slide in (bottom)</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(4)">Newspaper</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(5)">Fall</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(6)">Side Fall</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(7)">Sticky Up</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(8)">3D Flip (horizontal)</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(9)">3D Flip (vertical)</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(10)">3D Sign</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(11)">Super Scaled</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(12)">Just Me</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(13)">3D Slit</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(14)">3D Rotate Bottom</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(15)">3D Rotate In Left</a>
-		<a class="btn btn-primary" onclick="demo.modalEffect(16)">Blur</a>
-		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(17)">Let me in</a> -->
-		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(18)">Make way!</a> -->
-		<!-- <a class="btn btn-primary" onclick="demo.modalEffect(19)">Slip from top</a> -->
-	
-	</div>
-	
-	<br>
-	
-	<h3>How to use</h3>
-	<p>Creating new Modals is very simple.<br>Go ahead, open up your console and try some of these.</p>
-	</br>
-	
-	<div class="clearfix panel">
-	
-<pre><code>
-Modal.alert('Alert Title', 'This is an alert message.');
+    <hr>
+
+    <h1>License</h1>
+
+    <p>MIT © <a href="http://kevinjantzer.com">Kevin Jantzer</a></p>
 
 
-Modal.alert('Alert Title', 'This is an alert message.', function(){
-	// this is the callback for when the "ok" button is clicked
-});
+    <hr>
 
+    <small>Built by <a href="http://kevinjantzer.com">Kevin Jantzer</a>, <a href="http://blackstoneaudio.com">Blackstone Audio Inc.</a></small>
 
-Modal.alert('Alert Title Only', '');
-
-
-Modal.alert('This is an alert with message only, no title');
-
-
-// show a spinner
-var spinner = Modal.spinner();
-
-// close all modals
-Modal.close();
+</section>
 
 
 
-// those methods above are just shortcuts to creating Modals.
-// You can call the modal method on its own for complete control
-
-new Modal({
-	title: 'Title',
-	msg: 'The message text here. This could be HTML, or a jQuery object',
-	effect: 1, // 2, 3, 4, 5, 6 ... see top of Modal.js for style names
-	btns: [
-		'close', // shortcut to create close button
-		{label: 'Another Button', className: 'button-primary', onClick: function(){}};
-	]
-})
-</code></pre>
-	
-	</div>
-
-	<hr>
-	
-	<small>Built by Kevin Jantzer, Blackstone Audio Inc. 
-		Transitions based on the work done by <a href="http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/">Manoela Ilic</a>.</small>
-		
-		<br><br>
-	
-	</div>
 
 <script type="text/javascript">
-
-var demo = {
-	
-	alert: function(){
-		Modal.alert('Alert Title', 'This is an alert message.')
-	},
-	
-	alertTitle: function(){
-		Modal.alert('Alert Title Only', '')
-	},
-	
-	alertMsg: function(){
-		Modal.alert('This is an alert with message only, no title')
-	},
-	
-	alertLong: function(){
-		new Modal({
-			title: 'Alert Title', 
-			msg: '<p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p><p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p>'});
-	},
-	
-	
-	alertProgress: function(msg){
-		
-		var modal = new Modal({title: 'Uploading file...', msg: msg||'', btns: false})
-		
-		// fake progress
-		var progress = 0;
-		var interval = setInterval(function(){
-			
-			progress = progress+10;
-			
-			modal.progress(progress);
-			
-			if( progress >= 100 ){
-				clearInterval(interval);
-				modal.close();
-			}
-			
-		}, 200);
-		
-	},
-	
-	confirm: function(){
-		Modal.confirm(function(){
-			alert('You have confirmed this action!')
-		})
-	},
-	
-	confirmCancelCallback: function(){
-		Modal.confirm(function(){
-			alert('You have confirmed this action!')
-		}).on('cancel', function(){
-			alert('You have chosen to NOT confirm this action');
-		})
-	},
-	
-	confirmDelete: function(){
-		Modal.confirmDelete(function(){
-			alert('You have confirmed the deletion of an item!')
-		})
-	},
-
-	prompt: function(){
-		Modal.prompt('What’s your name?', '', {}, function(val){
-			setTimeout(function(){
-				alert('Hello '+val);
-			},0);
-		})
-	},
-
-	promptColor: function(){
-		Modal.prompt('Background Color', '', {pattern: 'hexcode', val: 'ffffff', placeholder: 'FFFFFF'}, function(val){
-			document.body.style.backgroundColor = val;
-		})
-	},
-
-	promptTextarea: function(){
-		var opts = {
-			placeholder: 'Tell us how you really feel...',
-			h: 100
-		};
-
-		Modal.prompt('Tell us', 'Write us a little blurb', opts, function(val){
-			setTimeout(function(){
-				alert('You said: '+val);
-			},0);
-		})
-	},
-	
-	spinner: function(){
-		Modal.spinner();
-		setTimeout(function(){
-			Modal.close() // closes all modals
-		}, 1200)
-	},
-	
-	alertAttentionGetters: function(){
-		
-		var m = new Modal({
-			title: 'Attention Getters',
-			msg: 'You can use theses attention getters to inform users of warnings and errors.<br>Animations are provided by <a href="http://daneden.github.io/animate.css/" target="_blank">Animate.css</a><br><br><b>Example:</b>\
-<pre><code>var m = new Modal({title: \'Testing\'});'+"\n"+'m.bounce();</code></pre>',
-			btns: [
-				{label: 'Bounce', className: 'btn-primary', onClick: function(){ m.bounce(); }},
-				{label: 'Wobble', className: 'btn-primary', onClick: function(){ m.wobble(); }},
-				{label: 'Shake', className: 'btn-primary', onClick: function(){ m.shake(); }},
-				{label: 'Swing', className: 'btn-primary', onClick: function(){ m.swing(); }},
-				{label: 'Tada', className: 'btn-primary', onClick: function(){ m.tada(); }},
-				{label: 'Pulse', className: 'btn-primary', onClick: function(){ m.pulse(); }},
-				'close'
-			]
-		})
-		
-	},
-	
-	modalEffect: function(effect){
-		new Modal({
-			title: 'Modal Title', 
-			msg: 'A short message about this modal.<br><br>There are several different effects that can be used<br>to show modals.',
-			effect: effect || 1
-		})
-	}
+alertLong = function(){
+    new Modal({
+        title: 'Terms of Service', 
+        msg: '<p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p><p>This is a really long message. You can see that the message scrolls. Meh Blue Bottle nulla consectetur dreamcatcher vero. Austin pug gastropub deserunt pour-over. Occaecat ethnic cillum, adipisicing dolore aliquip readymade Truffaut kogi McSweeney\'s do skateboard retro pork belly before they sold out. Ullamco delectus laboris, Tonx mixtape XOXO excepteur ad fashion axe irony deserunt mumblecore. Messenger bag voluptate pop-up, Intelligentsia yr selfies swag fugiat pickled. Exercitation chillwave semiotics, cupidatat placeat ad sint fugiat literally irure roof party bicycle rights. Roof party dolore gastropub fingerstache PBR pork belly, next level twee pop-up Bushwick viral fashion axe master cleanse freegan YOLO.</p><p>Banksy Neutra sunt enim ennui, ethical sapiente cray ut. Food truck typewriter mustache 3 wolf moon, eiusmod aesthetic Truffaut distillery cillum American Apparel gastropub DIY. Pitchfork butcher pug Carles culpa mollit. Selfies aesthetic actually, seitan raw denim Odd Future tattooed post-ironic pour-over squid vinyl four loko laboris Schlitz salvia. Odd Future next level elit meggings, small batch banh mi Schlitz tousled. Ex velit pour-over ennui chambray. Et Godard direct trade Etsy, aute ethnic fap duis.</p><p>Pickled anim reprehenderit Echo Park mollit, brunch Pitchfork mustache cillum High Life. Trust fund butcher wolf culpa, roof party Wes Anderson Vice iPhone. Austin Blue Bottle gastropub banh mi put a bird on it ethnic Carles. Roof party stumptown hashtag, single-origin coffee nihil dreamcatcher literally odio Banksy mollit aute paleo accusamus officia Tumblr. Echo Park chambray fap, mumblecore minim cred consequat paleo wolf drinking vinegar. Chambray cray Wes Anderson biodiesel drinking vinegar. Occupy selvage mlkshk, try-hard gluten-free non Vice banh mi trust fund.</p><p>Gentrify fashion axe whatever voluptate banjo. Vero jean shorts fanny pack bitters, cliche officia wayfarers. Assumenda farm-to-table lomo selvage, organic pour-over tousled mlkshk est craft beer. Fixie biodiesel duis, fugiat Blue Bottle roof party skateboard 8-bit cardigan pop-up banh mi irony ullamco raw denim pickled. Art party readymade banh mi, bitters quinoa 8-bit organic vegan pug Shoreditch McSweeney\'s four loko Tumblr DIY irony. Velit officia 3 wolf moon hashtag, incididunt Intelligentsia Marfa nisi chillwave. Pour-over lo-fi duis, meh sapiente kitsch nulla mixtape.</p>'});
 }
-
 </script>
-
-</div>
 
 </body>
 </html>

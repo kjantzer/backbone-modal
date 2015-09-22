@@ -1,28 +1,17 @@
-// set some default variables
-
-@red: red;
-@green: green;
-@dark: #444;
-@color-yellow: #f2d57e; // yellow
-@serif: 'Times New Roman';
-@sans-serif: 'Helvetica', 'Arial';
-
-@btn-color-blue: #2980b9;
-@btn-color-red: #c0392b;
-@btn-color-green: #27ae60;
-@btn-color-orange: #f39c12;
 
 
-body {
-	-webkit-font-smoothing: antialiased;
-	-moz-font-smoothing: antialiased;
-	font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
-}
+@color: #26A69A;
+@color-highlight: #1DE9B6;
 
-@import 'elements.less'; // http://lesselements.com/
-@import 'lib/animate.less';
-@import 'lib/kjc-reusable-styles'; // https://gist.github.com/kjantzer/5436097
-@import 'lib/flexbox-mixins.less'; // https://gist.github.com/kjantzer/7948269
 
+@import 'lib/demo-base.less'; // https://gist.github.com/kjantzer/fed29d575814024326cd
+
+@import 'node_modules/basic-buttons/src/basic-buttons.less';
+@font-dir: 'node_modules/basic-buttons/src/fontello/font/';
+
+@import 'lib/animate.less'; // modal uses this to animate prompt validation
 @import 'src/modal.less';
+
+.spacedout > * {
+	margin: 0 .5em .5em 0;
+}

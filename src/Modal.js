@@ -42,7 +42,7 @@
 		title: '',
 		msg: '',
 		btns: ['close'],
-		theme: '',
+		theme: 'ios7',
 		w: null, 
 		hide: false, 
 		hideMessage:'Don’t show again',
@@ -189,7 +189,7 @@
 			else
 				this.$title.show();
 		
-			if( this.options.title === 'spin'){
+			if( this.options.title === 'spin' || this.options.title === 'spinner'){
 				this.$title.html('');
 				this.spinner();
 				
@@ -486,7 +486,7 @@
 	
 		return new Modal({
 			title: title==null?'Continue?':title,
-			msg: msg==null?'Are you sure you want to delete this?':msg,
+			msg: msg==null?'Are you sure you want to continue?':msg,
 			theme: 'ios7',
 			btns: [{
 				label: 'Ok',
@@ -551,7 +551,7 @@
 			case 'integer': regex = '^[0-9]+$'; break;
 			case 'num':
 			case 'number':
-			case 'decimal': regex = '^[0-9](\.[0-9])?+$'; break;
+			case 'decimal': regex = '^[0-9]*\.?[0-9]+$'; break;
             case 'year': regex = '^$|^[1-2]{1}[0-9]{3}$'; break;
 		}
 
