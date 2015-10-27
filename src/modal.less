@@ -521,6 +521,7 @@ color: #fff;
 		font-size: 1.2rem;
 		.box-shadow(none);
 		padding-top: 30px;
+		min-height: 2.5em;
 		
 		h3 {
 			background: none;
@@ -530,14 +531,26 @@ color: #fff;
 		}
 		
 		.progress {
-			height: 2px;
-			top: calc(~"100% - 2.85em");
+			// height: 3px;
+			// top: calc(~"100% - 2.95em");
+			top: auto;
+			bottom: 0;
+			left: 0;
+			height: 8px;
+			-webkit-border-radius: 0 0 12px 12px;
+			-moz-border-radius: 0 0 12px 12px;
+			border-radius: 0 0 12px 12px;
+			overflow: hidden;
 			
 			.progress-bar {
 				background: @btn-color-blue;
 				background: #3498db;
 				.box-shadow(none);
 				.rounded(0);
+				height: 4px;
+				position: absolute;
+				left: 0;
+				bottom: 0;
 			}
 		}
 		

@@ -111,8 +111,9 @@
 		
 			this.options = _.extend({}, window.Modal.defaultSettings, this.options||{});
 			
-			this.$el.html('<div><div class="md-content"><h3></h3>\
+			this.$el.html('<div><div class="md-content">\
 							<div class="progress"><div class="progress-bar"></div></div>\
+                            <h3></h3>\
 							<div class="clearfix"><div class="content"></div>\
 							<div class="buttons"></div>\
 							<div class="checkbox hide"></div>\
@@ -418,6 +419,24 @@
 			});
 		}
 	}
+    
+/*
+    Progress
+*/
+    window.Modal.progress = function(title, msg){
+        
+        var args = defaultArgs(arguments, null, null);
+
+        if( args ) return window.Modal.progress.apply(this, args);
+
+        return new Modal({
+            effect: 3,
+            title: title,
+            msg: msg,
+            btns: false,
+            theme: 'centered thin ios7'
+        })
+    }
 
 	
 /*
