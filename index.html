@@ -200,6 +200,41 @@ new Modal({
 })
 </pre>
 
+    <br>
+    <h2><code>Modal.progress()</code></h2>
+
+    <p>Shows modal with no buttons. Save the created modal to a variable and use <code>.progress()</code> method to show progress. Useful for actions such as file upload.</p>
+
+    <p><a class="button" onClick="progressBtn()">Show Progress</a></p>
+
+    <script>progressBtn=function(){
+        var m = Modal.progress('Uploading', '');
+        var p = 0;
+        var i = setInterval(function(){
+            m.progress(p++);
+            
+            if( p >= 100 ){
+                clearInterval(i);
+                m.close();
+                Modal.alert('Upload Successful', '');
+            }
+        },30);
+    }</script>
+
+<pre>
+progressModal = Modal.progress('Uploading', '');
+
+// later...
+progressModal.progress(10) // 10%
+progressModal.progress(23) // 23%
+progressModal.progress(84) // 84%
+
+progressModal.close();
+</pre>
+
+    <blockquote>
+        <p><b>Tip:</b> you can use <code>.setTitle()</code> and <code>.setMsg()</code> to change the alert title and message while uploading. This could be used when uploading multiple files to show user which file is being uploaded.</p>
+    </blockquote>
     
     <hr>
 
