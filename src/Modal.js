@@ -564,6 +564,7 @@
 		var regex = opts.pattern;
 
 		switch(regex){
+            case 'required': regex = '^.+$'; break;
 			case 'hexcode': regex = '^#?[A-Za-z0-9]{6}$'; break;
 			case 'string': regex = '^.+'; break;
 			case 'int':
