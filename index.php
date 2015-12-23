@@ -28,6 +28,21 @@
 
 <header>
     
+    <nav class="menu">
+        <a class="menu-btn" onclick="this.parentNode.classList.toggle('open')"><img src="lib/list.png"></a>
+        <ul>
+            <?php
+            $menu = file_get_contents('https://gist.githubusercontent.com/kjantzer/9abbb6cc17d1b6699221/raw');
+            $menu = $menu ? json_decode($menu, true) : array();
+            foreach($menu as $item):?>
+            <li><a href="http://kjantzer.github.io/<?php echo $item['key'] ?>">
+                <?php echo $item['label'] ?>
+                <div class="description"><?php echo isset($item['description']) ? $item['description'] : '' ?></div>
+            </a></li>
+            <?php endforeach; ?>
+        </ul>
+    </nav>
+    
     <h1>Modal</h1>
     
     <h3>Create clean modal windows with sleek transitions and a simple API.</h3>
