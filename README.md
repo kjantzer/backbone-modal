@@ -39,6 +39,22 @@ There are several baked in modal types for common actions. [Check out the demo](
 Modal.alert('Title', 'Message')
 ```
 
+### Warn
+
+```js
+Modal.warn('Heads up', 'You can‘t do that')
+```
+
+![screenshot](https://i.imgur.com/WR08tw8.png)
+
+### Error
+
+```js
+Modal.error('Sorry', 'You are not allowed to perform that action')
+```
+
+![screenshot](https://i.imgur.com/a3B8LPD.png)
+
 ### Confirm
 
 ```js
@@ -62,6 +78,30 @@ Modal.prompt('Title', 'Message', {
 }, val=>{
     console.log('you entered: ', val)
 })
+```
+
+Prompt has some more options available
+
+```js
+{
+    okBtn: 'Ok',
+    password: false,
+    placeholder: 'Enter value...',
+    val: '',
+    prefix: '',
+    suffix: '',
+    msgAfter: '',
+    pattern: null, // a regex
+    h: null, // add height for textarea
+    w: null,
+    autoFocus: true
+}
+```
+
+### Image
+
+```js
+Modal.img('http://i.imgur.com/lu2sHfr.png')
 ```
 
 ### Spinner
@@ -96,13 +136,24 @@ var MyView = Backbone.View.extend({
     className: 'padded', // optional
     render: function(){
         this.$el.html('<p>My modal content here</p>')
+        return this
+    },
+    
+    btnAction: function(){
+        console.log('take action on the view')
+        this.modal&&this.modal.close() // close modal if exists
     }
 })
 
 var myView = new MyView();
 
-new Modal({view: myView})
-new Modal({view: myView, title: 'Custom Modal'}) // you can still use other settings
+new Modal({
+    view: myView,
+    btns: [
+        'cancel',
+        {label: 'View Action', onClick: 'btnAction'}
+    ]
+})
 
 // your view will have a reference to the modal (only while the modal is open)
 myView.modal.close()
@@ -110,6 +161,22 @@ myView.modal.close()
 
 ## Options
 
+```js
+{
+    effect: 1, // open/close animation effect
+    title: '',
+    msg: '',
+    headerImg: '',
+    icon: '',
+    btns: ['close'],
+    theme: 'ios7',
+    w: null,
+    onOpen: null,
+    onOpened: null,
+    onClose: null,
+    onClosed: null,
+}
+```
 
 ### `btns` - an array of buttons for the modal
 
@@ -122,7 +189,7 @@ btns: [
         label: 'Custom button',
         className: 'blue md-close',
         onClick: function(){
-            
+            console.log('custom button clicked')
         }
     }
 ]
@@ -130,13 +197,39 @@ btns: [
 
 >**Note:** the `md-close` class will make that button close the button in addition to calling the `onClick` method
 
+### `icon` - adds an animated button to the top of the modal
 
+Expects [basic buttons](https://github.com/kjantzer/basic-buttons) to be installed or a similar CSS icon font installed prefixed with `icon-`; ex: `icon-trash`.
+
+```js
+new Modal({title: 'Modal Title', icon: 'ok'})
+new Modal({title: 'Modal Title', icon: 'trash'})
+new Modal({title: 'Modal Title', icon: 'pencil'})
+```
+
+![screenshot](https://i.imgur.com/8oXxnYN.jpg)
+
+### `headerImg` - creates an image header above your title.
+
+```js
+new Modal({
+    title: 'Title',
+    msg: 'The modal content message',
+    headerImg: 'https://images.unsplash.com/photo-1469536526925-9b5547cd5d68?auto=format&fit=crop&w=2852&q=80',
+    w: 400
+})
+```
+
+![screenshot](https://i.imgur.com/100YR2L.png)
 
 ## Changelog
 
 #### v1.0.0
 - better handling of custom backbone views as content
 - btns `onClick` can be a string of method name on the custom backbone.view
+- new `warn` and `error` styling
+- new `headerImg` option
+- new `icon` option
 
 ## License
 
