@@ -153,13 +153,16 @@
 
 			this.$el.addClass('md-effect-'+this.options.effect+' '+this.options.theme);
 
-			if( this.options.w )
-				this.width(this.options.w);
-
 			this.progress(this.options.progress);
 
-			if( this.options.headerImg )
+			if( this.options.headerImg ){
 				this.$headerImg.html('<img src="'+this.options.headerImg+'">')
+			}
+			
+			if( this.options.w ){
+				this.width(this.options.w);
+				this.$headerImg.width(this.options.w)
+			}
 
 			if( this.options.icon )
 				this.$icon.addClass('icon-'+this.options.icon)
@@ -408,7 +411,8 @@
 			this.options.w = val;
 			this.$content.css({
 				width: val,
-				maxWidth: val
+				maxWidth: val,
+				boxSizing: 'border-box'
 			});
 			return this;
 		},

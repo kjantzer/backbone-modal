@@ -141,6 +141,8 @@ var MyView = Backbone.View.extend({
     
     btnAction: function(){
         console.log('take action on the view')
+        
+        // your view will have a reference to the modal (only while the modal is open)
         this.modal&&this.modal.close() // close modal if exists
     }
 })
@@ -154,9 +156,6 @@ new Modal({
         {label: 'View Action', onClick: 'btnAction'}
     ]
 })
-
-// your view will have a reference to the modal (only while the modal is open)
-myView.modal.close()
 ```
 
 ## Options
@@ -197,7 +196,7 @@ btns: [
 
 >**Note:** the `md-close` class will make that button close the button in addition to calling the `onClick` method
 
-### `icon` - adds an animated button to the top of the modal
+### `icon` - adds an animated icon to the top of the modal
 
 Expects [basic buttons](https://github.com/kjantzer/basic-buttons) to be installed or a similar CSS icon font installed prefixed with `icon-`; ex: `icon-trash`.
 
