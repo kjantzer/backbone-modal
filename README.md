@@ -4,7 +4,7 @@
 
 > Create clean modal windows with sleek transitions and a simple API.
 
-[![screenshot](http://i.imgur.com/lu2sHfr.png)](http://kjantzer.github.io/backbone-modal/)
+![screenshot](https://i.imgur.com/qsbn21c.gif)
 
 ### [Demo & Documentation](https://github.com/kjantzer/backbone-modal)
 
