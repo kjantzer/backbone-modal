@@ -1,6 +1,6 @@
 # Backbone Modal
 
-![Version 1.0.0](https://img.shields.io/badge/Version-1.0.0-blue.svg)
+![Version 1.1.0](https://img.shields.io/badge/Version-1.1.0-blue.svg)
 
 > Create clean modal windows with sleek transitions and a simple API.
 
@@ -194,7 +194,7 @@ btns: [
 ]
 ```
 
->**Note:** the `md-close` class will make that button close the button in addition to calling the `onClick` method
+>**Note:** the `md-close` class will make that button close the modal in addition to calling the `onClick` method
 
 ### `icon` - adds an animated icon to the top of the modal
 

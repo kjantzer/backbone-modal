@@ -157,6 +157,22 @@ perspective effects (not including the modals and the overlay).
                 -ms-transform: inherit;
                 transform: inherit;
         }
+        
+        &.rotated {
+            width: 100vh;
+            top: calc(~"(95vh - 100vw) / -2"); // makes sure the modal grows up to 95% of window height
+            justify-content: flex-end;
+        }
+        
+        &.rotated > div {
+            transform-origin: top left;
+            transform: rotate(90deg) translateY(-100%);
+            width: 100vh;
+            height: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 }
 
 // push a modal to the background when a new one pops up on top
@@ -206,13 +222,14 @@ perspective effects (not including the modals and the overlay).
                 padding: 0 !important;
                 //background: #333 !important;
                 //color: #fff;
-                .box-shadow(#fff 0 0 1px) !important;
+                box-shadow:#fff 0 0 1px !important;
         }
 
         h3 {
                 //color: #fff !important;
                 padding-top: 24px !important;
                 padding-bottom: 24px !important;
+                position: relative;
         }
 }
 
@@ -265,7 +282,7 @@ color: #fff;
 */
 
         background: #f5f5f5;
-        .box-shadow( #ddd 0 1px 0px 1px );
+        box-shadow: #ddd 0 1px 0px 1px;
         border-radius: 3px;
 
         h1.divider,
@@ -294,6 +311,13 @@ color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            
+            &.bgd {
+                position: absolute;
+                z-index: -1;
+                max-height: 80%;
+            }
 
             &:empty {
                 display: none;
@@ -304,7 +328,7 @@ color: #fff;
                 border-radius: 8px 8px 0 0 ;
             }
 
-            &:after {
+            &:not(.icon):after {
                 content: '';
                 position: absolute;
                 width: 100%;
@@ -312,6 +336,19 @@ color: #fff;
                 left: 0;
                 top: 0;
                 background: linear-gradient(to bottom, transparent, rgba(245,245,245,1));
+            }
+            
+            &.bgd:after {
+                background: linear-gradient(to bottom, rgba(245,245,245,.6), #f5f5f5);
+            }
+            
+            &.icon {
+                width: 120px;
+                margin: 0 auto 1em;
+                
+                img {
+                    border-radius: 8px;
+                }
             }
         }
 
@@ -321,18 +358,23 @@ color: #fff;
             border-radius: 4em;
             font-size: 3em;
             line-height: 0;
+            
+            &:not([class*="icon"]) {
+                display: none;
+            }
 
             &:before {
                 opacity: 1;
             }
 
-            // when an icon is showing, set some styls
+            // when an icon is showing, set some styles
             &[class*="icon"] {
                 border: solid 4px;
                 margin-bottom: .35em;
                 padding: .2em;
                 margin-left: 1em;
                 margin-right: 1em;
+                margin-top: 0px;
             }
 
             &.green,
@@ -356,13 +398,18 @@ color: #fff;
             &[class*="icon-download"] { color: #2196F3;}
 
             &.brown {
-                color: @color-brown;
+                color: #795548;
             }
 
             &.icon-attention-1:before {
                 // transform: scale(.8);
             }
         }
+        
+        .md-header-img.bgd + h1[class*="icon"] {
+            border-color: transparent;
+            background: rgba(255,255,255,.8);
+        } 
 
 
         h3 {
@@ -372,7 +419,7 @@ color: #fff;
                 font-weight: normal;
                 min-height: 1em;
                 margin: 0;
-                .box-sizing(content-box);
+                box-sizing: content-box;
         }
 
         .progress {
@@ -380,7 +427,7 @@ color: #fff;
                 height: 4px;
                 position: absolute;
                 top: 54px; /* height of h3 */
-                .box-shadow(none);
+                box-shadow:none;
                 background: none;
 
                 .progress-bar {
@@ -536,7 +583,7 @@ color: #fff;
                 margin-left: -2px;
                 margin-right: -2px;
                 background: #ffffaa;
-                .rounded(2px);
+                border-radius: 2px;
         }
 
 
@@ -662,10 +709,10 @@ color: #fff;
 
         .md-content {
                 background: rgba(245,245,245,.97);
-                .rounded(8px);
+                border-radius: 8px;
                 text-align: center;
                 font-size: 1.2rem;
-                .box-shadow(rgba(0,0,0,.1) 0 4px 20px);
+                box-shadow: rgba(0,0,0,.1) 0 4px 20px;
                 padding-top: 30px;
                 min-height: 2.5em;
 
@@ -691,8 +738,8 @@ color: #fff;
                         .progress-bar {
                                 background: @btn-color-blue;
                                 background: #3498db;
-                                .box-shadow(none);
-                                .rounded(0);
+                                box-shadow: none;
+                                border-radius: 0;
                                 height: 4px;
                                 position: absolute;
                                 left: 0;
@@ -709,7 +756,7 @@ color: #fff;
                         > .buttons {
                                 overflow: hidden;
                                 border-top: solid 1px #ccc;
-                                .border-radius(0, 8px, 8px, 0);
+                                border-radius: 0 0 8px 8px;
                                 display: -webkit-flex;
                                 display: -moz-flex;
                                 display: flex;
@@ -723,7 +770,7 @@ color: #fff;
                                         -moz-flex-grow: 1;
                                         flex-grow: 1;
                                         text-align: center;
-                                        .rounded(0);
+                                        border-radius: 0;
                                         background: transparent !important;
                                         border: none;
                                         color: @btn-color-dark !important;
@@ -756,7 +803,7 @@ color: #fff;
 
                                         &:active {
                                                 background: #eef1f2 !important;
-                                                .box-shadow(none);
+                                                box-shadow: none;
                                         }
                                 }
                         }
@@ -789,6 +836,11 @@ color: #fff;
         }
 
         &.image {
+            
+            > div {
+                max-width: none;
+            }
+            
             .md-content {
                 background: rgba(30,30,30,.92);
                 padding-top: 0;
@@ -805,6 +857,7 @@ color: #fff;
 
                         > img {
                             max-width: 100%;
+                            max-height: 80vh;
                         }
                     }
 
@@ -1005,12 +1058,12 @@ color: #fff;
 }
 
 /* Effect 7:  slide and stick to top */
-.modal.flex .md-effect-7.md-modal {
-        -webkit-align-content: flex-end;
-        -moz-align-content: flex-end;
-        align-content: flex-end;
+.md-effect-7.md-modal.flex {
+        -webkit-align-items: flex-end;
+        -moz-align-items: flex-end;
+        align-items: flex-end;
 }
-.md-effect-7.md-modal > div{
+.md-effect-7.md-modal:not(.flex) > div{
         top: 0;
         -webkit-transform: translateX(-50%);
         -moz-transform: translateX(-50%);
@@ -1035,7 +1088,7 @@ color: #fff;
         -moz-transform: translateY(0%);
         -ms-transform: translateY(0%);
         transform: translateY(0%);
-        border-radius: 0 0 3px 3px;
+        border-radius: 0 0 8px 8px;
         opacity: 1;
 }
 
@@ -1168,7 +1221,7 @@ color: #fff;
 .md-effect-12 .md-content h3,
 .md-effect-12 .md-content {
         background: transparent;
-        .box-shadow(none);
+        box-shadow: none;
 }
 
 .md-show.md-effect-12 .md-content {
