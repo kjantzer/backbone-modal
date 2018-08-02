@@ -38,7 +38,6 @@
     "backbone": ">=0.9.10",
     "basic-buttons": "^1.2.0",
     "jquery": "^3.3.1",
-    "settings": "^0.1.1",
     "spin.js": "2.3.2",
     "underscore": "^1.8.3"
   }

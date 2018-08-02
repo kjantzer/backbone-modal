@@ -2,7 +2,7 @@ node_modules
 demo-base.less
 elements.less
 flexbox-mixins.less
-./demo
+demo
+demo-build
 .cache
-./demo-build
 .DS_Store
